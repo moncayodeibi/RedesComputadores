@@ -87,13 +87,23 @@ public class ClientUDP {
 	clientSocket.receive(receivePacket);
         
         //Transforma bytes a String
+	
+	/*Por medio de la instanciaciión de la clase InputStream vamos a crear un objeto que nos va a 
+	ayudar a leer los bytes de llegada o enviados por el servidor como parametros se extrae
+	por medio del método getData de los bytes del mensaje enviado
+	*/
         InputStream myInputStream = new ByteArrayInputStream(receivePacket.getData()); 
+	// por medio del siguiente objeto de la clase BufferReader vamos a leer las líneas 
+	//de mensaje que hayan sido enviadas por el server	
         BufferedReader input = new BufferedReader(new InputStreamReader(myInputStream));
-        String answer = input.readLine();
+        //se crea un String que nos va a ayudar a colorar en esta variable los que el objeto input obtenga al leer la línea
+	String answer = input.readLine();
     
-        //Despliega mensaje
+        //En esta parte solo Desplegamos el mensaje por medio de la clase JOptionPane
         JOptionPane.showMessageDialog(null, answer);
+	/*Cerramos el socket del liente*/	
         clientSocket.close();
+	/*Cerramos el sistema*/	
         System.exit(0);
     }
 	

@@ -1,18 +1,42 @@
+//paquetes raiz del la Clase ClientUDP.java
 package ec.edu.epn.redes.mensaje.udp;
 
+//A continuación se ven los paquetes extras para la realización del proyecto
+/*BufferedReader es una clase que permite hacer lecturas sencillas de 
+texto desde un flujo de caracteres*/
 import java.io.BufferedReader;
+
+/*ByteArrayInputStream permite un buffer en la memoria
+para ser utilizado como un InputStream.*/
 import java.io.ByteArrayInputStream;
+
+/*clase para control de errores*/
 import java.io.IOException;
+
+/*La clase InputStream permite la lectura de bytes*/
 import java.io.InputStream;
+
+/*InputStreamReader es una clase que tiene métodos para leer caracteres*/
 import java.io.InputStreamReader;
+
+/*DatagramPacket proporciona un constructor que permite crear instancias de un array de bytes
+DatagramSocket da soporte a sockets para el envío y recepción de datagramas UDP.
+
+Las dos clases están ligadas en lo que tiene que ver el protocolo UDP, mientras la una  ayuda a
+contruir el paquetes de bytes separandolos en mensaje longitud, etc, DatagramSocket ayuda en el
+envío recepción del paquete
+*/
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+
+/*InetAddress permite crear objetos que permiten manipular direcciones IP y nombres de dominio*/
 import java.net.InetAddress;
 
+/*Clase para mostrar mensajes en pantalla, interfaz */
 import javax.swing.JOptionPane;
 
 /**
- * Trivial client for the date server.
+ * Inicio Clase ClientUDP
  */
 public class ClientUDP {
 

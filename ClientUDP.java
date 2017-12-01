@@ -43,27 +43,48 @@ public class ClientUDP {
 	private static int SERVER_PORT = 9091;
 	
 	/**
-     * Runs the client as an application.  First it displays a dialog
-     * box asking for the IP address or hostname of a host running
-     * the date server, then connects to it and displays the data that
-     * the server send.
+     Creamos una variable donde definimos el puerto 9091 para ocuparlo en 
+     nuestra transmisión como puerto de escucha
      */
 	
+	/*incio de la clase main*/
 	public static void main(String[] args) throws IOException {
         
-		String serverAddress = JOptionPane.showInputDialog("Enter IP Address of a machine that is\n" +
+	/*declaramos al variable serverAddres tipo string qu epor medio de un JOPtionPane de ingreso 
+	nos va a permitir ingresar una dirección ip y del servidor, que en este momento ya debe estar corriendo
+	y debe estar escuchando en el puerto 9091
+	*/
+		
+	String serverAddress = JOptionPane.showInputDialog("Enter IP Address of a machine that is\n" +
             "running the date service on port "+SERVER_PORT+":");
        
         //Send packet (Request)
+	/*Inatanciamos la clase DatagramSocket que como dijimos antes servia para manipular las IP, 
+	el objeto es clientSocket
+	*/	
         DatagramSocket clientSocket = new DatagramSocket();
+		
+	/*creamos una array byfferSend con los digitos que ingresamos en el JOPtioPane anterior y los convertimos en bytes*/	
         byte bufferSend[] = serverAddress.getBytes();
+	
+	/*Instanciamos la clase DatagramPacket con parámetros, para que pueda transformar los datos ingresados en 
+	en un paquete de envío, necesitando el arreglo de bytes bufferSend, su longitud, el nombre por la clase InetAddress de
+	la dirección ip que mandamos, y el puerto de escucha
+	*/
         DatagramPacket sendPacket = new DatagramPacket(bufferSend,bufferSend.length,InetAddress.getByName(serverAddress),SERVER_PORT);
-        clientSocket.send(sendPacket);
+        /*Utilizamos el metodo send del objeto instanciado de la clase clientSocket y mandamos sendPacket, que tiene los datos 
+	de la ip del servidor que digitamos
+	*/
+	clientSocket.send(sendPacket);
         
         //Receive packet
+	//creamos un buffer de llegada de bytes con 128 posiciones para almacenar lo que ingrese	
         byte bufferReceive[] = new byte[128];
+	/*Instanciamos de igual manera otro objeto de Datagram Paquet 
+	que no sirva de buffer de llegada, con parámetros el arrar creaado y su longitud*/	
         DatagramPacket receivePacket = new DatagramPacket(bufferReceive, bufferReceive.length);
-        clientSocket.receive(receivePacket);
+        /*para luego con el objeto clienteSocket de DatagramSocket utiliza el método de recibir */
+	clientSocket.receive(receivePacket);
         
         //Transforma bytes a String
         InputStream myInputStream = new ByteArrayInputStream(receivePacket.getData()); 
